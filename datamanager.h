@@ -38,3 +38,5 @@ private:
 };
 
 #endif	/* DATAMANAGER_H */
+
+//nothing
