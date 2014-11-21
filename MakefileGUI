@@ -1,0 +1,30 @@
+
+
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -fpermissive -std=c++11
+
+MAINOBJS =	data.o canChannel.o datamanager.o DeadlineTimer.o LoggingChannel.o
+
+GUIOBJS =	GUIMain.o GUI/guiChannel.o GUI/Armaturenbrett.o GUI/Dreieck.o GUI/Instrument.o GUI/Tacho.o GUI/Tankanzeige.o GUI/Triangle.o GUI/Verbrauch.o GUI/WriteText.o GUI/Zylinder_mit_Deckel.o GUI/ITextur.o GUI/Skybox.o
+
+CMDOBJS =	testMain.o
+
+LIBS = -lpthread  -lGL -lGLU -lglut -lSOIL
+
+TARGETGUI =	BPSE_SOSE14_PORSCHE_GUI
+TARGETDE2I =	BPSE_SOSE14_PORSCHE_DE2I
+TARGETCMD =	BPSE_SOSE14_PORSCHE_CMD
+
+
+GUI:	$(MAINOBJS) $(GUIOBJS)
+	$(CXX) -o $(TARGETGUI) $(MAINOBJS) $(GUIOBJS) $(LIBS)
+
+DE2I:	$(MAINOBJS) $(GUIOBJS)
+	$(CXX) -o $(TARGETDE2I) $(MAINOBJS) $(CMDOBJS)
+
+CMD:	$(MAINOBJS) $(GUIOBJS)
+	$(CXX) -o $(TARGETCMD)  $(MAINOBJS) $(CMDOBJS)
+
+all:	GUI
+
+clean:
+	rm -f $(MAINOBJS) $(MAINOBJS) $(GUIOBJS) $(CMDOBJS) 
